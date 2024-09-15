@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Moneris testing</title>
+    <meta name="description" content="Testing Moneris checkout" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://gatewayt.moneris.com/chktv2/js/chkt_v2.00.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <link rel="stylesheet" href="styles/normalize.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+</head>
+
+<body>
+    <div class="app">
+        <aside>
+            <h1 id="title">command</h1>
+            <form>
+                <input id="ticketNumber" type="text" placeholder="TicketNr." />
+            </form>
+            <header class="redirect">
+                <button id="startTicketButton">Ticket</button>
+                <button id="startCheckoutButton">Checkout</button>
+                <button id="startReceiptButton">Receipt</button>
+            </header>
+            <div id="rsp" class="rsp"></div>
+        </aside>
+        <main>
+            <div id="monerisCheckout"></div>
+
+            <!-- Modal window for displaying the receipt -->
+            <div id="receiptModal">
+                <div id="receiptModalContent">
+                    <span id="closeModal">×</span>
+                    <h2>Payment Receipt</h2>
+                    <div id="receiptDetails"></div>
+                </div>
+            </div>
+            <div id="rsp" class="rsp"></div>
+
+        </main>
+        <script>
+            const queryParams = new URLSearchParams(window.location.search);
+            document.getElementById("ticketNumber").value = queryParams.get('tck');
+
+            for(const param of queryParams){
+                console.log(param);
+            }
+            // Execute a function when the user presses a key on the keyboard
+            document.getElementById("ticketNumber")
+                .addEventListener("keypress", function (event) {
+                    if (event.key === "Enter") {
+                        event.preventDefault();
+                        document.getElementById("startCheckoutButton").click();
+                    }
+                });
+
+            // Event listener for the start checkout button
+            document.getElementById("startTicketButton")
+                .addEventListener("click", function () {
+                    initializeMonerisTicket();
+                });
+            // Event listener for the start checkout button
+            document.getElementById("startReceiptButton")
+                .addEventListener("click", function () {
+                    var ticketNumber = document.getElementById("ticketNumber").value;
+                    if (ticketNumber) {
+                        initializeMonerisReceipt(ticketNumber);
+                    } else {
+                        alert("Please enter a ticket number.");
+                    }
+                });
+            // Event listener for the start checkout button
+            document.getElementById("startCheckoutButton")
+                .addEventListener("click", function () {
+                    var ticketNumber = document.getElementById("ticketNumber").value;
+                    if (ticketNumber) {
+                        initializeMonerisCheckout(ticketNumber);
+                    } else {
+                        alert("Please enter a ticket number.");
+                    }
+                });
+            // Close the modal when the user clicks on <span> (x)
+            document.getElementById("closeModal").onclick = function () {
+                document.getElementById("receiptModal").style.display = "none";
+            };
+
+            // Close the modal when the user clicks anywhere outside of the modal
+            window.onclick = function (event) {
+                if (event.target == document.getElementById("receiptModal")) {
+                    document.getElementById("receiptModal").style.display = "none";
+                }
+            };
+        </script>
+        <script src="js/moneris.js"></script>
+    </div>
+</body>
+
+</html>
