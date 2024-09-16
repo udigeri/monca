@@ -30,7 +30,7 @@ body {
     border: 1px solid black;
 
     width: 62rem;
-    height: 60rem;
+    min-height: 1200px;
 
     border-radius: 0.5rem;
 
@@ -46,7 +46,7 @@ main {
 
 aside {
     background: rgb(221, 228, 239);
-    width: 38%;
+    width: 62%;
 
     min-width: 260px;
 }
@@ -96,7 +96,7 @@ input::placeholder {
 }
 
 main {
-    width: 62%;
+    width: 38%;
     border-left: 2px solid black;
     background: rgb(247, 247, 247);
 }

@@ -6,6 +6,7 @@ const command = "Payment"
 
 
 
+
 const requestTicket = {
     store_id: storeId,
     api_token: apiToken,
@@ -47,7 +48,7 @@ async function initializeMonerisTicket(data) {
         const data = await response.json();
         console.log(data);
         document.getElementById("ticketNumber").value = data.response.ticket;
-        document.getElementById("rsp").innerHTML = "<p>" + JSON.stringify(data.response) + "</p>";
+        document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(data.response) + "</p><hr>";
         parseResponse(data.response);
     } catch (e) {
         console.error(e);
@@ -70,7 +71,7 @@ async function initializeMonerisReceipt(ticketNumber) {
         });
         const data = await response.json();
         console.log(data);
-        document.getElementById("rsp").innerHTML = "<p>" + JSON.stringify(data) + "</p>";
+        document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(data) + "</p><hr>";
     } catch (e) {
         console.error(e);
     }
@@ -112,6 +113,8 @@ function initializeMonerisCheckout(ticketNumber) {
             console.log("Transaction was cancelled:", response);
             parseResponse(response);
             response = JSON.parse(response);
+            document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
+            
             ticketNumber = response.ticket;
             myCheckout.closeCheckout(ticketNumber)
 
@@ -121,6 +124,8 @@ function initializeMonerisCheckout(ticketNumber) {
             console.log("Payment receipt:", response);
             parseResponse(response);
             response = JSON.parse(response);
+            document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
+
             ticketNumber = response.ticket;
             const myTimeout = setTimeout(myReceiptViewed, 5000);
         }
@@ -143,7 +148,8 @@ function initializeMonerisCheckout(ticketNumber) {
         function myPaymentSubmit(rsp) {
             console.log("Payment submit.");
             parseResponse(rsp);
-
+            response = JSON.parse(rsp);
+            document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
         }
 
         function myRemoveBackButton() {
@@ -153,6 +159,8 @@ function initializeMonerisCheckout(ticketNumber) {
         function myPageClosed(rsp) {
             console.log("The page closed.");
             parseResponse(rsp);
+            response = JSON.parse(rsp);
+            document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
         }
 
         function myPaymentSubmitted() {
@@ -163,9 +171,6 @@ function initializeMonerisCheckout(ticketNumber) {
             console.log("Validation Event");
         }
 
-        function onGooglePaymentButtonClicked() {
-            console.log("onGooglePaymentButtonClicked Event");
-        }
 
         // Initialize the checkout with the provided ticket number
         myCheckout.startCheckout(ticketNumber);

@@ -25,10 +25,9 @@
                 <button id="startCheckoutButton">Checkout</button>
                 <button id="startReceiptButton">Receipt</button>
             </header>
-            <div id="rsp" class="rsp"></div>
-        </aside>
-        <main>
-            <div id="monerisCheckout"></div>
+            <div id="outerDiv" style="width: 550px; height:920px; margin-top: 10px; border: 1px solid black; border-radius: 8px;">
+                <div id="monerisCheckout"></div>
+            </div>
 
             <!-- Modal window for displaying the receipt -->
             <div id="receiptModal">
@@ -38,14 +37,15 @@
                     <div id="receiptDetails"></div>
                 </div>
             </div>
+        </aside>
+        <main>
             <div id="rsp" class="rsp"></div>
-
         </main>
         <script>
             const queryParams = new URLSearchParams(window.location.search);
             document.getElementById("ticketNumber").value = queryParams.get('tck');
 
-            for(const param of queryParams){
+            for (const param of queryParams) {
                 console.log(param);
             }
             // Execute a function when the user presses a key on the keyboard
