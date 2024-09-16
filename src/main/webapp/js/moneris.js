@@ -6,16 +6,16 @@ const command = "Payment"
 
 
 
-
 const requestTicket = {
     store_id: storeId,
     api_token: apiToken,
     checkout_id: "",
-    order_no: 'cartId:' + crypto.randomUUID(),
     txn_total: '10.00',
-    language: 'en',
     environment: 'qa',
-    action: 'preload'
+    action: 'preload',
+    order_no: 'cartId:' + crypto.randomUUID(),
+    cust_id:  'corrId:' + crypto.randomUUID(),
+    language: 'en'
 }
 const requestReceipt = {
     store_id: storeId,
