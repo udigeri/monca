@@ -25,9 +25,9 @@
                 <button id="startCheckoutButton">Checkout</button>
                 <button id="startReceiptButton">Receipt</button>
             </header>
-            <div id="outerDiv" style="width: 550px; height:920px; margin-top: 10px; border: 1px solid black; border-radius: 8px;">
-                <div id="monerisCheckout"></div>
-            </div>
+            <!-- <div id="outerDiv" style="width: 550px; height:920px; margin-top: 10px; border: 1px solid black; border-radius: 8px;">
+            </div> -->
+            <div id="monerisCheckout"></div>
 
             <!-- Modal window for displaying the receipt -->
             <div id="receiptModal">
@@ -63,25 +63,25 @@
                     initializeMonerisTicket();
                 });
             // Event listener for the start checkout button
-            document.getElementById("startReceiptButton")
-                .addEventListener("click", function () {
-                    var ticketNumber = document.getElementById("ticketNumber").value;
-                    if (ticketNumber) {
-                        initializeMonerisReceipt(ticketNumber);
-                    } else {
-                        alert("Please enter a ticket number.");
-                    }
-                });
-            // Event listener for the start checkout button
             document.getElementById("startCheckoutButton")
-                .addEventListener("click", function () {
-                    var ticketNumber = document.getElementById("ticketNumber").value;
-                    if (ticketNumber) {
-                        initializeMonerisCheckout(ticketNumber);
-                    } else {
-                        alert("Please enter a ticket number.");
-                    }
-                });
+            .addEventListener("click", function () {
+                var ticketNumber = document.getElementById("ticketNumber").value;
+                if (ticketNumber) {
+                    initializeMonerisCheckout(ticketNumber);
+                } else {
+                    alert("Please enter a ticket number.");
+                }
+            });
+            // Event listener for the start receipt button
+            document.getElementById("startReceiptButton")
+            .addEventListener("click", function () {
+                var ticketNumber = document.getElementById("ticketNumber").value;
+                if (ticketNumber) {
+                    initializeMonerisReceipt(ticketNumber);
+                } else {
+                    alert("Please enter a ticket number.");
+                }
+            });
             // Close the modal when the user clicks on <span> (x)
             document.getElementById("closeModal").onclick = function () {
                 document.getElementById("receiptModal").style.display = "none";

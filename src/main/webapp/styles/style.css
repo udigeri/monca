@@ -41,7 +41,6 @@ body {
 aside,
 main {
     padding: 1rem;
-    overflow-y: scroll
 }
 
 aside {
@@ -114,7 +113,6 @@ h1.all {
     color: rgb(var(--color-all));
 }
 .rsp p {
-    display: block;
     overflow-wrap:break-word;
     max-width: 100%;
     font-size: 0.9rem;

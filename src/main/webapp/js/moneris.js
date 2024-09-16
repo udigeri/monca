@@ -6,6 +6,7 @@ const command = "Payment"
 
 
 
+
 const requestTicket = {
     store_id: storeId,
     api_token: apiToken,
@@ -14,7 +15,7 @@ const requestTicket = {
     environment: 'qa',
     action: 'preload',
     order_no: 'cartId:' + crypto.randomUUID(),
-    cust_id:  'corrId:' + crypto.randomUUID(),
+    cust_id: 'corrId:' + crypto.randomUUID(),
     language: 'en'
 }
 const requestReceipt = {
@@ -37,7 +38,7 @@ async function initializeMonerisTicket(data) {
     document.getElementById("title").innerText = command;
     if (command === 'Payment') {
         requestTicket.checkout_id = checkoutId_Payment;
-        requestTicket.txn_total = "8.00";
+        requestTicket.txn_total = "7.00";
     }
 
     try {
@@ -64,7 +65,7 @@ async function initializeMonerisReceipt(ticketNumber) {
         if (command === 'Payment') {
             requestReceipt.checkout_id = checkoutId_Payment;
         }
-    
+
         const response = await fetch("https://gatewayt.moneris.com/chktv2/request/request.php", {
             method: 'POST',
             body: JSON.stringify(requestReceipt)
@@ -95,10 +96,10 @@ function initializeMonerisCheckout(ticketNumber) {
         // Set up the necessary callbacks
         myCheckout.setCallback("page_loaded", myPageLoad);
         myCheckout.setCallback("cancel_transaction", myCancelTransaction);
-        myCheckout.setCallback("payment_receipt", myPaymentReceipt);
+        //myCheckout.setCallback("payment_receipt", myPaymentReceipt);
         myCheckout.setCallback("payment_complete", myPaymentComplete);
         myCheckout.setCallback("error_event", myErrorEvent);
-        myCheckout.setCallback("payment_submit", myPaymentSubmit);
+        // myCheckout.setCallback("payment_submit", myPaymentSubmit);
         // myCheckout.setCallback("remove_back_button", myRemoveBackButton);
         myCheckout.setCallback("page_closed", myPageClosed);
         myCheckout.setCallback("payment_submitted", myPaymentSubmitted);
@@ -114,12 +115,19 @@ function initializeMonerisCheckout(ticketNumber) {
             parseResponse(response);
             response = JSON.parse(response);
             document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
-            
+
             ticketNumber = response.ticket;
             myCheckout.closeCheckout(ticketNumber)
 
+            setTimeout(myRedirect, 1000);
             //window.location.replace("http://127.0.0.1:5500/src/main/webapp/index.html?tck=" + ticketNumber);
         }
+
+        function myRedirect() {
+            console.log("Redirect");
+            window.location.replace("http://127.0.0.1:5500/src/main/webapp/index.html?tck=" + ticketNumber);
+        }
+
         function myPaymentReceipt(response) {
             console.log("Payment receipt:", response);
             parseResponse(response);
@@ -127,48 +135,59 @@ function initializeMonerisCheckout(ticketNumber) {
             document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
 
             ticketNumber = response.ticket;
-            const myTimeout = setTimeout(myReceiptViewed, 5000);
+            setTimeout(myReceiptViewed, 5000);
         }
 
         function myReceiptViewed() {
             console.log("ReceiptViewed");
             myCheckout.closeCheckout(ticketNumber)
-            //window.location.replace("http://127.0.0.1:5500/src/main/webapp/index.html?tck=" + ticketNumber);
+            window.location.replace("http://127.0.0.1:5500/src/main/webapp/index.html?tck=" + ticketNumber);
         }
 
-        function myPaymentComplete() {
+        function myPaymentComplete(response) {
             console.log("Payment complete.");
-            myCheckout.closeCheckout(ticketNumber)
-        }
-
-        function myErrorEvent() {
-            console.log("Error event.");
-        }
-
-        function myPaymentSubmit(rsp) {
-            console.log("Payment submit.");
-            parseResponse(rsp);
-            response = JSON.parse(rsp);
+            parseResponse(response);
+            response = JSON.parse(response);
             document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
+            setTimeout(myReceiptViewed, 1000);
+        }
+
+        function myErrorEvent(response) {
+            console.log("Error event.");
+            parseResponse(response);
+            response = JSON.parse(response);
+            document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
+        }
+
+        function myPaymentSubmit(response) {
+            console.log("Payment submit.");
         }
 
         function myRemoveBackButton() {
             console.log("Remove Back Button.");
         }
 
-        function myPageClosed(rsp) {
+        function myPageClosed(response) {
             console.log("The page closed.");
-            parseResponse(rsp);
-            response = JSON.parse(rsp);
+            parseResponse(response);
+            response = JSON.parse(response);
             document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
+            myCheckout.closeCheckout(ticketNumber)
+            //window.location.replace("http://127.0.0.1:5500/src/main/webapp/index.html?tck=" + ticketNumber);
         }
 
-        function myPaymentSubmitted() {
+        function myPaymentSubmitted(response) {
             console.log("The payment Submitted");
+            parseResponse(response);
+            response = JSON.parse(response);
+            document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
         }
 
         function myValidationEvent() {
             console.log("Validation Event");
+            parseResponse(response);
+            response = JSON.parse(response);
+            document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
         }
 
 
@@ -191,15 +210,10 @@ function parseResponse(response) {
             console.error("Failed to parse response JSON:", e);
             return;
         }
-    }
-    for (const property in response) {
-        console.log(`${property}: ${response[property]}`);
-    }
 
-    // if (response.error !== null){
-    //     for (const property in response.error) {
-    //         console.log(`${property}: ${response.error[property]}`);
-    //     }    
-    // }
+        for (const property in response) {
+            console.log(`${property}: ${response[property]}`);
+        }
+    }
 }
 
