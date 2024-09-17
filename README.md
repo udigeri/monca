@@ -12,8 +12,9 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
   "environment": "qa",
   "action": "preload",
   "order_no": "cartId:{{$guid}}",
+  // optional
   "cust_id": "corrId:{{$guid}}",
-  "language": "en"
+  "language": "fr"
 }' 'https://gatewayt.moneris.com/chktv2/request/request.php'
 ```
 
