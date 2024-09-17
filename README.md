@@ -8,11 +8,12 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
   "store_id": "{{$dotenv STORE_ID}}",
   "api_token": "{{$dotenv API_TOKEN}}",
   "checkout_id": "{{$dotenv CHECKOUT_ID}}",
-  "order_no": "cartId:{{$guid}}",
   "txn_total": "0.00",
-  "language": "en",
   "environment": "qa",
-  "action": "preload"
+  "action": "preload",
+  "order_no": "cartId:{{$guid}}",
+  "cust_id": "corrId:{{$guid}}",
+  "language": "en"
 }' 'https://gatewayt.moneris.com/chktv2/request/request.php'
 ```
 
@@ -21,7 +22,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 {
   "response": {
     "success": "true",
-    "ticket": "1725949780VuxBjlqjGm2J9R7me5AbvNPHA9dbdT"
+    "ticket": "1726560498e1DHVkvi5k9RckkoFOlFXhdJ52zsnF"
   }
 }
 ```
@@ -34,13 +35,14 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
   "store_id": "{{$dotenv STORE_ID}}",
   "api_token": "{{$dotenv API_TOKEN}}",
   "checkout_id": "{{$dotenv CHECKOUT_ID}}",
-  "ticket": "1726238011YgYTJ1CNejNHcy6AQICzlZaZCaqgXF",
+  "ticket": "1726560498e1DHVkvi5k9RckkoFOlFXhdJ52zsnF",
   "environment": "qa",
   "action": "receipt"
 }' 'https://gatewayt.moneris.com/chktv2/request/request.php'
 ```
 
-**Response**
+**Response invalid**
+
 ```json
 {
   "response": {
@@ -53,6 +55,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 }
 ```
 
+**Response ok**
 ```json
 {
   "response": {
@@ -134,6 +137,113 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
             "condition": "0",
             "status": "success",
             "code": "1M",
+            "details": ""
+          },
+          "avs": {
+            "decision_origin": "Moneris",
+            "result": "3",
+            "condition": "0",
+            "status": "disabled",
+            "code": "",
+            "details": ""
+          },
+          "3d_secure": {
+            "decision_origin": "Moneris",
+            "result": "3",
+            "condition": "1",
+            "status": "disabled",
+            "code": "",
+            "details": ""
+          },
+          "kount": {
+            "decision_origin": "Moneris",
+            "result": "3",
+            "condition": null,
+            "status": "disabled",
+            "code": "",
+            "details": ""
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+**Response nok**
+```json
+{
+  "response": {
+    "success": "true",
+    "request": {
+      "txn_total": "0.00",
+      "cust_info": {
+        "first_name": null,
+        "last_name": null,
+        "phone": null,
+        "email": null
+      },
+      "shipping": {
+        "address_1": null,
+        "address_2": null,
+        "city": null,
+        "country": null,
+        "province": null,
+        "postal_code": null
+      },
+      "billing": null,
+      "cc_total": "0.00",
+      "pay_by_token": "0",
+      "cc": {
+        "first6last4": "6250940771",
+        "expiry": "1249",
+        "cardholder": "Moneris test"
+      },
+      "ticket": "1726560498e1DHVkvi5k9RckkoFOlFXhdJ52zsnF",
+      "cust_id": "corrId:1ca368b4-9b65-47f7-b57d-01bab0d6aae3",
+      "dynamic_descriptor": null,
+      "order_no": "cartId:001c6ea2-f8dd-4e33-96cb-ba46aa0aa0b0",
+      "eci": "7"
+    },
+    "receipt": {
+      "result": "d",
+      "cc": {
+        "result": "d",
+        "order_no": "cartId:001c6ea2-f8dd-4e33-96cb-ba46aa0aa0b0_veri",
+        "cust_id": "corrId:1ca368b4-9b65-47f7-b57d-01bab0d6aae3",
+        "transaction_no": "59-0_899",
+        "reference_no": "660188950010010610",
+        "transaction_code": "06",
+        "transaction_type": "200",
+        "transaction_date_time": "2024-09-17 04:10:17",
+        "corporate_card": null,
+        "amount": "0.00",
+        "response_code": "055",
+        "iso_response_code": "40",
+        "approval_code": "000000",
+        "card_type": "UP",
+        "dynamic_descriptor": null,
+        "invoice_number": null,
+        "customer_code": null,
+        "eci": "7",
+        "cvd_result_code": "null",
+        "avs_result_code": null,
+        "cavv_result_code": null,
+        "first6last4": "6250940771",
+        "expiry_date": "1249",
+        "recur_success": null,
+        "issuer_id": "null",
+        "is_debit": "false",
+        "ecr_no": "66018895",
+        "batch_no": "001",
+        "sequence_no": "061",
+        "fraud": {
+          "cvd": {
+            "decision_origin": "Moneris",
+            "result": "4",
+            "condition": "0",
+            "status": "ineligible",
+            "code": "",
             "details": ""
           },
           "avs": {
