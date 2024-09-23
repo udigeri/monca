@@ -1,9 +1,8 @@
 console.log("Script loaded");
 
 
-//const command = "Payment"
-const command = "Tokenization"
-
+const command = "Payment"
+//const command = "Tokenization"
 
 
 
@@ -183,7 +182,7 @@ function initializeMonerisCheckout(ticketNumber) {
             document.getElementById("rsp").innerHTML += "<p>" + JSON.stringify(response) + "</p><hr>";
         }
 
-        function myValidationEvent() {
+        function myValidationEvent(response) {
             console.log("Validation Event");
             parseResponse(response);
             response = JSON.parse(response);
