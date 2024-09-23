@@ -14,19 +14,49 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
   "order_no": "cartId:{{$guid}}",
   // optional
   "cust_id": "corrId:{{$guid}}",
-  "language": "fr"
+  "language": "en"
 }' 'https://gatewayt.moneris.com/chktv2/request/request.php'
 ```
 
+**Request**
+```json
+{
+  "store_id": "monca10391",
+  "api_token": "tiUxlT5oau4pa0BgMaE7",
+  "checkout_id": "chkt5FU7F10391",
+  "txn_total": "0.00",
+  "environment": "qa",
+  "action": "preload",
+  "order_no": "cartId:64b33765-0504-4ccc-b9df-4ef1f24a2052",
+  "cust_id": "corrId:d32825e0-552d-4be3-97eb-7b1eb2882abe",
+  "language": "en"
+}
+```
 **Response**
 ```json
 {
   "response": {
     "success": "true",
-    "ticket": "1726560498e1DHVkvi5k9RckkoFOlFXhdJ52zsnF"
+    "ticket": "1726820807T55AZxCjC3wAPkKrym0NB8yfd9UvoF"
   }
 }
 ```
+
+
+**Request check Expired session http status code 410 - Gone**
+```rest
+curl -X GET --header 'Accept: application/json' -d '{
+}' 'https://gatewayt.moneris.com/chktv2/display/index.php?tck=1726573282sFRNlNdlGb4fs1dMsquP54pwJCGEHF'
+```
+
+Timeout 5 mins for expiration
+
+https://gatewayt.moneris.com/chktv2/style/images/chkt_apple_pay.png
+
+
+https://gatewayt.moneris.com/chktv2/style/head_style.php?col2=FDC300&col=3B3F4C&fs=false&font_family=AvenirLT-Roman&font_size=small
+
+https://developer.moneris.com/livedemo/v_admin/get_expiring/tool/java
 
 ## Get Receipt - Ticket Number
 
@@ -36,14 +66,25 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
   "store_id": "{{$dotenv STORE_ID}}",
   "api_token": "{{$dotenv API_TOKEN}}",
   "checkout_id": "{{$dotenv CHECKOUT_ID}}",
-  "ticket": "1726560498e1DHVkvi5k9RckkoFOlFXhdJ52zsnF",
+  "ticket": "1726820807T55AZxCjC3wAPkKrym0NB8yfd9UvoF",
   "environment": "qa",
   "action": "receipt"
 }' 'https://gatewayt.moneris.com/chktv2/request/request.php'
 ```
 
-**Response invalid**
+**Request**
+```json
+{
+  "store_id": "monca10391",
+  "api_token": "tiUxlT5oau4pa0BgMaE7",
+  "checkout_id": "chkt5FU7F10391",
+  "ticket": "1726820807T55AZxCjC3wAPkKrym0NB8yfd9UvoF",
+  "environment": "qa",
+  "action": "receipt"
+}
+```
 
+**Response invalid**
 ```json
 {
   "response": {
@@ -81,63 +122,62 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
       "cc_total": "0.00",
       "pay_by_token": "0",
       "cc": {
-        "first6last4": "4242424242",
-        "expiry": "0125",
-        "cardholder": "Me"
+        "first6last4": "3566005365",
+        "expiry": "0126",
+        "cardholder": "jcb name"
       },
-      "ticket": "1725949780VuxBjlqjGm2J9R7me5AbvNPHA9dbdT",
-      "cust_id": null,
+      "ticket": "1726820807T55AZxCjC3wAPkKrym0NB8yfd9UvoF",
+      "cust_id": "corrId:d32825e0-552d-4be3-97eb-7b1eb2882abe",
       "dynamic_descriptor": null,
-      "order_no": "cartId:12c32eb7-e2bf-4804-9eee-7201199be88b",
-      "issuer_id": "024091002301439",
+      "order_no": "cartId:64b33765-0504-4ccc-b9df-4ef1f24a2052",
       "eci": "7"
     },
     "receipt": {
       "result": "a",
       "cc": {
         "result": "a",
-        "order_no": "cartId:12c32eb7-e2bf-4804-9eee-7201199be88b_veri",
-        "cust_id": null,
-        "transaction_no": "14-0_892",
-        "reference_no": "660191770010020100",
+        "order_no": "cartId:64b33765-0504-4ccc-b9df-4ef1f24a2052_veri",
+        "cust_id": "corrId:d32825e0-552d-4be3-97eb-7b1eb2882abe",
+        "transaction_no": "125-0_902",
+        "reference_no": "660188950010011180",
         "transaction_code": "06",
         "transaction_type": "200",
-        "transaction_date_time": "2024-09-10 02:30:14",
+        "transaction_date_time": "2024-09-20 04:28:27",
         "corporate_card": null,
         "amount": "0.00",
-        "response_code": "027",
-        "iso_response_code": "01",
-        "approval_code": "000000",
-        "card_type": "V",
+        "response_code": "025",
+        "iso_response_code": "00",
+        "approval_code": "118681",
+        "card_type": "C1",
         "dynamic_descriptor": null,
         "invoice_number": null,
         "customer_code": null,
         "eci": "7",
-        "cvd_result_code": "1M",
+        "cvd_result_code": "null",
         "avs_result_code": null,
         "cavv_result_code": null,
-        "first6last4": "4242424242",
-        "expiry_date": "0125",
+        "first6last4": "3566005365",
+        "expiry_date": "0126",
         "recur_success": null,
-        "issuer_id": "024091002301439",
+        "issuer_id": "null",
         "is_debit": "false",
-        "ecr_no": "66019177",
-        "batch_no": "002",
-        "sequence_no": "010",
+        "ecr_no": "66018895",
+        "batch_no": "001",
+        "sequence_no": "118",
         "tokenize": {
           "success": "true",
-          "first4last4": "4242***4242",
-          "datakey": "hVndXyNargNJocZgGkbOT7h02",
+          "first4last4": "3566***5365",
+          "datakey": "HZEcPUGMKdzs3vSg7F8mDWaX5",
           "status": "001",
           "message": "Successfully registered CC details."
         },
         "fraud": {
           "cvd": {
             "decision_origin": "Moneris",
-            "result": "1",
+            "result": "4",
             "condition": "0",
-            "status": "success",
-            "code": "1M",
+            "status": "ineligible",
+            "code": "",
             "details": ""
           },
           "avs": {
@@ -276,4 +316,167 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
     }
   }
 }
+```
+
+
+
+## Payment with Token
+```rest
+curl https://api.stripe.com/v1/payment_intents
+  -u "sk_test_tbQBLTsG4qQ8OjX4fxkv9GC800wBRZfbqm:"
+  -d amount=1000
+  -d currency=jpy
+  -d "payment_method_types[]"=card
+  -d statement_descriptor_suffix="example descriptor"
+```
+
+**Request**
+```rest
+curl -X POST --header 'Content-Type: text/xml' -d 
+"
+<?xml version="1.0"?>
+<request>
+    <res_purchase_cc>
+        <data_key>u8xBAh3LhfHed2PTmNTnTSlL2</data_key>
+        <order_id>cartId:64b33765-0504-4ccc-b9df-4ef1f24a2062</order_id>
+        <cust_id>corrId:d32825e0-552d-4be3-97eb-7b1eb2882abe</cust_id>
+        <amount>1.01</amount>
+        <crypt_type>7</crypt_type>
+        <cof_info>
+            <payment_indicator>U</payment_indicator>
+            <payment_information>2</payment_information>
+            <issuer_id>024092005410066</issuer_id>
+        </cof_info>
+    </res_purchase_cc>
+</request>
+" 'https://mpg1t.moneris.io:443/gateway2/servlet/MpgRequest'
+```
+
+**Response**
+```xml
+<?xml version="1.0"?>
+<response>
+	<receipt>
+		<DataKey>WBtBt9oUcBbVsCoeMVSnFdUb4</DataKey>
+		<ReceiptId>null</ReceiptId>
+		<ReferenceNum>null</ReferenceNum>
+		<ResponseCode>null</ResponseCode>
+		<ISO>null</ISO>
+		<AuthCode>null</AuthCode>
+		<Message>The transaction was not sent to the host because of a duplicate order id</Message>
+		<TransTime>null</TransTime>
+		<TransDate>null</TransDate>
+		<TransType>null</TransType>
+		<Complete>false</Complete>
+		<TransAmount>null</TransAmount>
+		<CardType>null</CardType>
+		<TransID>null</TransID>
+		<TimedOut>false</TimedOut>
+		<CorporateCard>false</CorporateCard>
+		<RecurSuccess>null</RecurSuccess>
+		<AvsResultCode>null</AvsResultCode>
+		<CvdResultCode>null</CvdResultCode>
+		<ResSuccess>true</ResSuccess>
+		<PaymentType>cc</PaymentType>
+		<IsVisaDebit>false</IsVisaDebit>
+		<ResolveData>
+			<cust_id>corrId:0f5805ab-f239-437c-930d-26c13902735b</cust_id>
+			<phone></phone>
+			<email></email>
+			<note>tokenize</note>
+			<expdate>2501</expdate>
+			<masked_pan>5454***5454</masked_pan>
+			<crypt_type>7</crypt_type>
+			<avs_street_number></avs_street_number>
+			<avs_street_name></avs_street_name>
+			<avs_zipcode></avs_zipcode>
+		</ResolveData>
+	</receipt>
+</response>
+```
+
+```xml
+<?xml version="1.0"?>
+<response>
+	<receipt>
+		<DataKey>WBtBt9oUcBbVsCoeMVSnFdUb4</DataKey>
+		<ReceiptId>Test1726639736860</ReceiptId>
+		<ReferenceNum>660188950010010800</ReferenceNum>
+		<ResponseCode>027</ResponseCode>
+		<ISO>01</ISO>
+		<AuthCode>T32472</AuthCode>
+		<Message>APPROVED           *                    =</Message>
+		<TransTime>02:11:35</TransTime>
+		<TransDate>2024-09-18</TransDate>
+		<TransType>00</TransType>
+		<Complete>true</Complete>
+		<TransAmount>1.00</TransAmount>
+		<CardType>M</CardType>
+		<TransID>81-0_900</TransID>
+		<TimedOut>false</TimedOut>
+		<CorporateCard>false</CorporateCard>
+		<RecurSuccess>null</RecurSuccess>
+		<AvsResultCode>null</AvsResultCode>
+		<CvdResultCode>null</CvdResultCode>
+		<ResSuccess>true</ResSuccess>
+		<PaymentType>cc</PaymentType>
+		<IsVisaDebit>false</IsVisaDebit>
+		<ResolveData>
+			<cust_id>corrId:0f5805ab-f239-437c-930d-26c13902735b</cust_id>
+			<phone></phone>
+			<email></email>
+			<note>tokenize</note>
+			<expdate>2501</expdate>
+			<masked_pan>5454***5454</masked_pan>
+			<crypt_type>7</crypt_type>
+			<avs_street_number></avs_street_number>
+			<avs_street_name></avs_street_name>
+			<avs_zipcode></avs_zipcode>
+		</ResolveData>
+		<IssuerId>null</IssuerId>
+	</receipt>
+</response>
+```
+
+```xml
+<?xml version="1.0"?>
+<response>
+	<receipt>
+		<DataKey>WBtBt9oUcBbVsCoeMVSnFdUb4</DataKey>
+		<ReceiptId>Test1726747179494</ReceiptId>
+		<ReferenceNum>660188950010011020</ReferenceNum>
+		<ResponseCode>481</ResponseCode>
+		<ISO>05</ISO>
+		<AuthCode>000000</AuthCode>
+		<Message>DECLINED           *                    =</Message>
+		<TransTime>08:01:05</TransTime>
+		<TransDate>2024-09-19</TransDate>
+		<TransType>00</TransType>
+		<Complete>true</Complete>
+		<TransAmount>2.05</TransAmount>
+		<CardType>M</CardType>
+		<TransID>108-0_901</TransID>
+		<TimedOut>false</TimedOut>
+		<CorporateCard>false</CorporateCard>
+		<RecurSuccess>null</RecurSuccess>
+		<AvsResultCode>null</AvsResultCode>
+		<CvdResultCode>null</CvdResultCode>
+		<ResSuccess>true</ResSuccess>
+		<PaymentType>cc</PaymentType>
+		<IsVisaDebit>false</IsVisaDebit>
+		<ResolveData>
+			<cust_id>corrId:0f5805ab-f239-437c-930d-26c13902735b</cust_id>
+			<phone></phone>
+			<email></email>
+			<note>tokenize</note>
+			<expdate>2501</expdate>
+			<masked_pan>5454***5454</masked_pan>
+			<crypt_type>7</crypt_type>
+			<avs_street_number></avs_street_number>
+			<avs_street_name></avs_street_name>
+			<avs_zipcode></avs_zipcode>
+		</ResolveData>
+		<IssuerId>null</IssuerId>
+	</receipt>
+</response>
 ```
