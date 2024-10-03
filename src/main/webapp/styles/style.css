@@ -1,6 +1,7 @@
 :root {
     --color-all: 156, 163, 175;
     --color-all-darker: 75, 85, 101;
+    --obrys: 2px;
 }
 
 html {
@@ -10,14 +11,10 @@ html {
 body {
     color: rgb(44, 44, 44);
     font-size: 18px;
-    font-family: -apple-system, -system-ui, "Segoe UI", Roboto, Helvetica, Arial,
-        sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: -apple-system, -system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-    background-image: linear-gradient(
-        to right,
-        rgb(218, 217, 217),
-        rgb(110, 110, 110)
-    );
+    background-image: linear-gradient(to right, rgb(218, 217, 217), rgb(110, 110, 110));
 
     min-height: 100vh;
 
@@ -76,14 +73,14 @@ input::placeholder {
 
 .redirect {
     display: flex;
-    align-items:flex-start;
+    align-items: flex-start;
     justify-content: space-around;
 }
 
 .redirect button {
-    margin-top:10px;
+    margin-top: 10px;
     font-size: 1rem;
-    
+
     padding: 0.75rem 0.575rem 0.75rem 0.575rem;
     border-radius: 0.375rem;
     background: rgb(var(--color-all));
@@ -102,7 +99,7 @@ main {
 
 /* TITLES */
 h1 {
-    font-size: 2.0rem;
+    font-size: 2rem;
     font-family: "Arial Rounded MT Bold", "Nunito", sans-serif;
     margin-left: 1rem;
     margin-bottom: 1.5rem;
@@ -113,7 +110,7 @@ h1.all {
     color: rgb(var(--color-all));
 }
 .rsp p {
-    overflow-wrap:break-word;
+    overflow-wrap: break-word;
     max-width: 100%;
     font-size: 0.9rem;
 }
@@ -151,3 +148,105 @@ h1.all {
     cursor: pointer;
 }
 
+.order {
+    border: var(--obrys) dashed salmon;
+    color: red;
+    font-size: 16px;
+    font-weight: normal;
+
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.order-details {
+    border: var(--obrys) dotted seagreen;
+    margin: 5px 5px 2px 5px;
+}
+
+.order-details span {
+    padding-left: 5px;
+}
+
+.order-id {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cart {
+    border: 1px solid gray;
+    border-radius: 10px;
+    vertical-align: baseline;
+    padding:15px;
+    margin: 5px;
+    display: flex;
+}
+
+.cart span {
+    padding-left: 15px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+svg {
+    max-width: 25px;
+    max-height: 25px;
+}
+
+
+.center {
+    font-size: 14px !important;
+    text-align: center;
+}
+
+.right {
+    font-size: 14px !important;
+    text-align: right;
+}
+
+.left {
+    font-size: 14px !important;
+    text-align: left;
+}
+
+.header {
+    border: var(--obrys) dotted seagreen;
+    margin: 5px 5px 0px 5px;
+    max-height: 60px;
+    vertical-align: baseline;
+}
+
+.header-text {
+    display: inline-block;
+    vertical-align: baseline;
+    font-size: 12px;
+}
+
+.header-image {
+    display: inline-block;
+    vertical-align: baseline;
+    margin: 0px 20px 0px 10px;
+    max-width: 400px;
+}
+
+.footer {
+    border: var(--obrys) dotted seagreen;
+    padding: 2px;
+    margin: 5px;
+    height: 50px;
+    vertical-align: baseline;
+}
+
+.footer-text {
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: baseline;
+}
+
+.footer-image {
+    display: inline-block;
+    margin: 0px 20px 0px 10px;
+    vertical-align: baseline;
+    width: 93px;
+}
