@@ -1,7 +1,7 @@
 :root {
     --color-all: 156, 163, 175;
     --color-all-darker: 75, 85, 101;
-    --obrys: 2px;
+    --obrys: 1px;
 }
 
 html {
@@ -14,7 +14,7 @@ body {
     font-family: -apple-system, -system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-    background-image: linear-gradient(to right, rgb(218, 217, 217), rgb(110, 110, 110));
+    /* background-image: linear-gradient(to right, rgb(218, 217, 217), rgb(110, 110, 110)); */
 
     min-height: 100vh;
 
@@ -41,7 +41,7 @@ main {
 }
 
 aside {
-    background: rgb(221, 228, 239);
+    background-color: #F9F9F9;
     width: 62%;
 
     min-width: 260px;
@@ -94,7 +94,7 @@ input::placeholder {
 main {
     width: 38%;
     border-left: 2px solid black;
-    background: rgb(247, 247, 247);
+    /* background: rgb(247, 247, 247); */
 }
 
 /* TITLES */
@@ -150,7 +150,7 @@ h1.all {
 
 .order {
     border: var(--obrys) dashed salmon;
-    color: red;
+    color: #333;
     font-size: 16px;
     font-weight: normal;
 
@@ -162,7 +162,7 @@ h1.all {
 
 .order-details {
     border: var(--obrys) dotted seagreen;
-    margin: 5px 5px 2px 5px;
+    margin: 5px 15px 2px 15px;
 }
 
 .order-details span {
@@ -175,18 +175,19 @@ h1.all {
 }
 
 .cart {
-    border: 1px solid gray;
-    border-radius: 10px;
+    background-color: rgb(255, 253, 244);
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);
+    /* border: 1px solid rgb(201, 201, 201);
+    border-radius: 10px; */
     vertical-align: baseline;
     padding:15px;
-    margin: 5px;
+    margin-top: 5px;
     display: flex;
 }
 
 .cart span {
     padding-left: 15px;
     font-size: 14px;
-    font-weight: 600;
 }
 
 svg {
