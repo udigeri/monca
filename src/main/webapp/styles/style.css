@@ -1,7 +1,8 @@
 :root {
-    --color-all: 156, 163, 175;
-    --color-all-darker: 75, 85, 101;
-    --obrys: 1px;
+    --color-all: rgb(171, 179, 194);
+    --color-all-darker: rgb(132, 146, 170);
+    --cart-color:  rgb(255, 255, 255);
+    --contour: 2px;
 }
 
 html {
@@ -83,12 +84,12 @@ input::placeholder {
 
     padding: 0.75rem 0.575rem 0.75rem 0.575rem;
     border-radius: 0.375rem;
-    background: rgb(var(--color-all));
+    background: var(--color-all);
 }
 
 .redirect button:hover,
 .redirect button:active {
-    background: rgb(var(--color-all-darker));
+    background: var(--color-all-darker);
 }
 
 main {
@@ -107,7 +108,7 @@ h1 {
 }
 
 h1.all {
-    color: rgb(var(--color-all));
+    color: var(--color-all);
 }
 .rsp p {
     overflow-wrap: break-word;
@@ -149,7 +150,7 @@ h1.all {
 }
 
 .order {
-    border: var(--obrys) dashed salmon;
+    border: var(--contour) dashed salmon;
     color: #333;
     font-size: 16px;
     font-weight: normal;
@@ -161,7 +162,7 @@ h1.all {
 }
 
 .order-details {
-    border: var(--obrys) dotted seagreen;
+    border: var(--contour) dotted seagreen;
     margin: 5px 15px 2px 15px;
 }
 
@@ -175,7 +176,7 @@ h1.all {
 }
 
 .cart {
-    background-color: rgb(255, 253, 244);
+    background-color: var(--cart-color);
     box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);
     /* border: 1px solid rgb(201, 201, 201);
     border-radius: 10px; */
@@ -212,7 +213,7 @@ svg {
 }
 
 .header {
-    border: var(--obrys) dotted seagreen;
+    border: var(--contour) dotted seagreen;
     margin: 5px 5px 0px 5px;
     max-height: 60px;
     vertical-align: baseline;
@@ -232,7 +233,7 @@ svg {
 }
 
 .footer {
-    border: var(--obrys) dotted seagreen;
+    border: var(--contour) dotted seagreen;
     padding: 2px;
     margin: 5px;
     height: 50px;
