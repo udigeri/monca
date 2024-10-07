@@ -21,9 +21,9 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 **Request**
 ```json
 {
-  "store_id": "monca10391",
-  "api_token": "tiUxlT5oau4pa0BgMaE7",
-  "checkout_id": "chkt5FU7F10391",
+  "store_id": "monca10xxx",
+  "api_token": "tiUxxx",
+  "checkout_id": "chkt5FU7F10xxx",
   "txn_total": "0.00",
   "environment": "qa",
   "action": "preload",
@@ -45,7 +45,7 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 
 **Request check Expired session http status code 410 - Gone**
 ```rest
-curl -X GET --header 'Accept: application/json' -d '{
+curl -X HEAD --header 'Accept: application/json' -d '{
 }' 'https://gatewayt.moneris.com/chktv2/display/index.php?tck=1726573282sFRNlNdlGb4fs1dMsquP54pwJCGEHF'
 ```
 
@@ -75,9 +75,9 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
 **Request**
 ```json
 {
-  "store_id": "monca10391",
-  "api_token": "tiUxlT5oau4pa0BgMaE7",
-  "checkout_id": "chkt5FU7F10391",
+  "store_id": "monca10xxx",
+  "api_token": "tiUxxx",
+  "checkout_id": "chkt5FU7F10xxx",
   "ticket": "1726820807T55AZxCjC3wAPkKrym0NB8yfd9UvoF",
   "environment": "qa",
   "action": "receipt"
@@ -336,6 +336,8 @@ curl -X POST --header 'Content-Type: text/xml' -d
 "
 <?xml version="1.0"?>
 <request>
+    <store_id>monca10xxx</store_id>
+    <api_token>tiUxxx</api_token> 
     <res_purchase_cc>
         <data_key>u8xBAh3LhfHed2PTmNTnTSlL2</data_key>
         <order_id>cartId:64b33765-0504-4ccc-b9df-4ef1f24a2062</order_id>
@@ -478,5 +480,128 @@ curl -X POST --header 'Content-Type: text/xml' -d
 		</ResolveData>
 		<IssuerId>null</IssuerId>
 	</receipt>
+</response>
+```
+
+
+
+
+## Delete Token
+
+**Request**
+```rest
+curl -X POST --header 'Content-Type: text/xml' -d 
+"
+<?xml version="1.0"?>
+<request>
+    <store_id>monca10xxx</store_id>
+    <api_token>tiUxxx</api_token> 
+    <res_delete>
+        <data_key>HDHvxZBjes7husgu4ayTtjm55</data_key>
+    </res_delete>
+</request>
+" 'https://mpg1t.moneris.io:443/gateway2/servlet/MpgRequest'
+```
+
+**Response**
+```xml
+<?xml version="1.0"?>
+<response>
+    <receipt>
+        <DataKey>HDHvxZBjes7husgu4ayTtjm55</DataKey>
+        <ReceiptId>null</ReceiptId>
+        <ReferenceNum>null</ReferenceNum>
+        <ResponseCode>001</ResponseCode>
+        <ISO>null</ISO>
+        <AuthCode>null</AuthCode>
+        <Message>Successfully deleted CC details.</Message>
+        <TransTime>08:08:18</TransTime>
+        <TransDate>2024-10-04</TransDate>
+        <TransType>null</TransType>
+        <Complete>true</Complete>
+        <TransAmount>null</TransAmount>
+        <CardType>null</CardType>
+        <TransID>null</TransID>
+        <TimedOut>false</TimedOut>
+        <CorporateCard>null</CorporateCard>
+        <RecurSuccess>null</RecurSuccess>
+        <AvsResultCode>null</AvsResultCode>
+        <CvdResultCode>null</CvdResultCode>
+        <ResSuccess>true</ResSuccess>
+        <PaymentType>cc</PaymentType>
+        <IsVisaDebit>null</IsVisaDebit>
+        <ResolveData>
+            <cust_id>corrId:859b7c5b-a75c-42e4-bfd7-918d8b46fd0b</cust_id>
+            <phone></phone>
+            <email></email>
+            <note>tokenize</note>
+            <expdate>2601</expdate>
+            <masked_pan>3735***5005</masked_pan>
+            <crypt_type>7</crypt_type>
+            <avs_street_number></avs_street_number>
+            <avs_street_name></avs_street_name>
+            <avs_zipcode></avs_zipcode>
+        </ResolveData>
+    </receipt>
+</response>
+```
+
+## Validate Token
+
+**Request**
+```rest
+curl -X POST --header 'Content-Type: text/xml' -d 
+"
+<?xml version="1.0"?>
+<request>
+    <store_id>monca10xxx</store_id>
+    <api_token>tiUxxx</api_token> 
+    <res_lookup_masked>
+        <data_key>Jyz7GF9TS17uaSvHv8yFmetz4</data_key>
+    </res_lookup_masked>
+</request>
+" 'https://mpg1t.moneris.io:443/gateway2/servlet/MpgRequest'
+```
+
+**Response**
+```xml
+<?xml version="1.0"?>
+<response>
+    <receipt>
+        <DataKey>Kfnbe4vID2hIn9jd5Oxmmnyb2</DataKey>
+        <ReceiptId>null</ReceiptId>
+        <ReferenceNum>null</ReferenceNum>
+        <ResponseCode>001</ResponseCode>
+        <ISO>null</ISO>
+        <AuthCode>null</AuthCode>
+        <Message>Successfully located CC details.</Message>
+        <TransTime>04:41:30</TransTime>
+        <TransDate>2024-10-07</TransDate>
+        <TransType>null</TransType>
+        <Complete>true</Complete>
+        <TransAmount>null</TransAmount>
+        <CardType>null</CardType>
+        <TransID>null</TransID>
+        <TimedOut>false</TimedOut>
+        <CorporateCard>null</CorporateCard>
+        <RecurSuccess>null</RecurSuccess>
+        <AvsResultCode>null</AvsResultCode>
+        <CvdResultCode>null</CvdResultCode>
+        <ResSuccess>true</ResSuccess>
+        <PaymentType>cc</PaymentType>
+        <IsVisaDebit>null</IsVisaDebit>
+        <ResolveData>
+            <expdate>2601</expdate>
+            <masked_pan>4242***4242</masked_pan>
+            <crypt_type>7</crypt_type>
+            <cust_id>corrId:36aecc06-0ae3-4208-9a79-8ad4e22480c3</cust_id>
+            <phone></phone>
+            <email></email>
+            <note>tokenize</note>
+            <avs_street_number></avs_street_number>
+            <avs_street_name></avs_street_name>
+            <avs_zipcode></avs_zipcode>
+        </ResolveData>
+    </receipt>
 </response>
 ```

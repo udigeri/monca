@@ -1,8 +1,8 @@
 console.log("Script loaded");
 
 
-const command = "Payment"
-//const command = "Tokenization"
+//const command = "Payment"
+const command = "Tokenization"
 
 
 
