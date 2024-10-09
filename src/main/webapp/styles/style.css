@@ -2,7 +2,7 @@
     --color-all: rgb(171, 179, 194);
     --color-all-darker: rgb(132, 146, 170);
     --cart-color:  rgb(255, 255, 255);
-    --contour: 2px;
+    --contour: 0px;
 }
 
 html {

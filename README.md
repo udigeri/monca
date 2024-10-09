@@ -605,3 +605,119 @@ curl -X POST --header 'Content-Type: text/xml' -d
     </receipt>
 </response>
 ```
+
+
+
+
+# GooglePay Response
+```json
+{
+  "response": {
+    "success": "true",
+    "request": {
+      "txn_total": "7.00",
+      "cust_info": { "email": null },
+      "cc_total": "7.00",
+      "wallet": {
+        "type": "googlepay",
+        "paymentData": {
+          "apiVersion": 2,
+          "apiVersionMinor": 0,
+          "paymentMethodData": {
+            "description": "Test Card: Amex •••• 0005",
+            "info": {
+              "assuranceDetails": {
+                "accountVerified": true,
+                "cardHolderAuthenticated": false
+              },
+              "cardDetails": "0005",
+              "cardNetwork": "AMEX"
+            },
+            "tokenizationData": {
+              "token": "{\"signature\":\"MEUCIQDkLYtW8AfTLU5jg7x7YvTz88VGfNDmLB43ML1JO+2IHwIgFXPYlKFqwCCD0TfBw+dQ5QLQCVhuyVhf8xNjPI0jEo0\\u003d\",\"protocolVersion\":\"ECv1\",\"signedMessage\":\"{\\\"encryptedMessage\\\":\\\"ufSEthOPoDqaNeYzRfhC+0pkN5x1remdAH0bi2i6ORkftrCVpf7KiVTsYhTXuCdt1pfr0a22B+zMOSynu4Sdc4UarHSrdJ5kiwoxsUnhFWFBIC0mNPI2jZzr2N3CmEx+qdrEes0tPu5yDGLvDv7RvzUgoB3PaZb285ESwMQ7EouSG0lYMlZXdfiePBHej+a3YNFSo97hmPf5DJIGkiktydEKvqZ4MU/3FyKLCv3erkl+o6wllg+7dHYAG6+rsf1ixUDCsgYB7Fb99TCEOSHlK2ssE7C12a4gc/uNJIvblVPJEyoNJ/4qk3WuSTETku/in2QStOwgudXzl6kqbdtr6zetX/9gyldXsEww40/DQrZsw4IojA45MAKGIz10PanfDilzuesekcOZ4k1/oeWh00dZyI2Zy97bGntAGV8cPQ\\\\u003d\\\\u003d\\\",\\\"ephemeralPublicKey\\\":\\\"BJQl1C2vxugtud2SuHcoi4vBcl1Sl0OXsHEvaPfbqHVXAi+cCBvzCgV5R04QUBwjVwJCdJBwuIdR28JL92//Vnk\\\\u003d\\\",\\\"tag\\\":\\\"oNwEklS7hXJmmiNKNZp7rpRZxZ8jpXPtSUzQeMU4wbM\\\\u003d\\\"}\"}",
+              "type": "PAYMENT_GATEWAY"
+            },
+            "type": "CARD"
+          }
+        }
+      },
+      "ticket": "1728391387YBEZ3aLUsQrkPoq7VNCdlwotw6gfDF",
+      "cust_id": "corrId:7795a1f5-900e-419d-b8a7-5705ff98cb3b",
+      "dynamic_descriptor": null,
+      "order_no": "cartId:2a113851-6f02-4bfb-a0f4-b855ff278263",
+      "eci": "7"
+    },
+    "receipt": {
+      "result": "a",
+      "cc": {
+        "order_no": "cartId:2a113851-6f02-4bfb-a0f4-b855ff278263",
+        "cust_id": "corrId:7795a1f5-900e-419d-b8a7-5705ff98cb3b",
+        "transaction_no": "193-0_920",
+        "reference_no": "660188950010011800",
+        "transaction_code": "00",
+        "transaction_type": "200",
+        "transaction_date_time": "2024-10-08 08:44:06",
+        "corporate_card": null,
+        "amount": "7.00",
+        "response_code": "025",
+        "iso_response_code": "00",
+        "approval_code": "755387",
+        "card_type": "AX",
+        "dynamic_descriptor": null,
+        "invoice_number": null,
+        "customer_code": null,
+        "eci": "7",
+        "cvd_result_code": null,
+        "avs_result_code": null,
+        "cavv_result_code": null,
+        "first6last4": null,
+        "expiry_date": null,
+        "recur_success": null,
+        "issuer_id": null,
+        "is_debit": "false",
+        "ecr_no": "66018895",
+        "batch_no": "001",
+        "sequence_no": "180",
+        "result": "a",
+        "wallet_type": "googlepay",
+        "sub_type": null,
+        "account_type": null,
+        "fraud": {
+          "3d_secure": {
+            "decision_origin": "Moneris",
+            "result": "3",
+            "condition": "1",
+            "status": "disabled",
+            "code": "",
+            "details": ""
+          },
+          "kount": {
+            "decision_origin": "Moneris",
+            "result": "3",
+            "condition": null,
+            "status": "disabled",
+            "code": "",
+            "details": ""
+          },
+          "cvd": {
+            "decision_origin": "Merchant",
+            "result": "4",
+            "condition": "0",
+            "status": "ineligible",
+            "code": "",
+            "details": ""
+          },
+          "avs": {
+            "decision_origin": "Merchant",
+            "result": "3",
+            "condition": "0",
+            "status": "disabled",
+            "code": "",
+            "details": ""
+          }
+        }
+      }
+    }
+  }
+}
+```

@@ -58,6 +58,12 @@
                     </section>
 
                     <div
+                        id="moneris-apple-pay"
+                        store-id="store 1"
+                        merchant-identifier="simple.moneris.effective-meme-9x4j9g94wxrf9xx9-5500.app.github.dev"
+                        display-name="Ta testuje"
+                    ></div>
+                    <div
                         id="outerDiv"
                         style="
                             height: 700px;
@@ -92,7 +98,34 @@
                 <h1 id="title">Log</h1>
                 <div id="rsp" class="rsp"></div>
             </main>
+            <script src="js/callbacks.js"></script>
             <script>
+                // Instantiate the monerisCheckout object
+                let checkoutInst = new monerisCheckout();
+                const cb = {
+                    checkout: checkoutInst,
+                    pageLoaded: myPageLoad,
+                    cancelTransaction: myCancelTransaction,
+                };
+
+                // Set the environment mode: "qa" for testing or "production" for live transactions
+                checkoutInst.setMode("qa");
+
+                // Specify the div where the checkout form will be rendered
+                checkoutInst.setCheckoutDiv("monerisCheckout");
+
+                // Set up the necessary callbacks
+                checkoutInst.setCallback("page_loaded", cb.pageLoaded);
+                checkoutInst.setCallback("cancel_transaction", cb.cancelTransaction);
+                //checkoutInst.setCallback("payment_receipt", myPaymentReceipt);
+                checkoutInst.setCallback("payment_complete", myPaymentComplete);
+                checkoutInst.setCallback("error_event", myErrorEvent);
+                // checkoutInst.setCallback("payment_submit", myPaymentSubmit);
+                // checkoutInst.setCallback("remove_back_button", myRemoveBackButton);
+                checkoutInst.setCallback("page_closed", myPageClosed);
+                checkoutInst.setCallback("payment_submitted", myPaymentSubmitted);
+                checkoutInst.setCallback("validation_event", myValidationEvent);
+
                 const queryParams = new URLSearchParams(window.location.search);
                 document.getElementById("ticketNumber").value = queryParams.get("tck");
 
@@ -118,11 +151,7 @@
                     .getElementById("startCheckoutButton")
                     .addEventListener("click", function () {
                         var ticketNumber = document.getElementById("ticketNumber").value;
-                        if (ticketNumber) {
-                            initializeMonerisCheckout(ticketNumber);
-                        } else {
-                            alert("Please enter a ticket number.");
-                        }
+                        initializeMonerisCheckout(checkoutInst, ticketNumber);
                     });
                 // Event listener for the start receipt button
                 document
