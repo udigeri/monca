@@ -36,7 +36,7 @@ async function initializeMonerisTicket(data) {
     document.getElementById("title").innerText = command;
     if (command === 'Payment') {
         requestTicket.checkout_id = checkoutId_Payment;
-        requestTicket.txn_total = "4.00";
+        requestTicket.txn_total = "3.00";
     }
 
     try {
