@@ -164,6 +164,9 @@
                 }
             };
 
+        </script>
+        <script src="js/moneris.js"></script>
+        <script>
             const request = {
                 countryCode: 'CA',
                 currencyCode: 'CAD',
@@ -191,14 +194,59 @@
             }
 
             console.log(ticketNumber);
-            window.MonerisApplePay.setTicket(ticketNumber);
 
-            let session = new ApplePaySession(3, request);
+            var session = new ApplePaySession(3, request);
             console.log("Apple Session" + session);
 
+            window.MonerisApplePay.setTicket(ticketNumber);
 
+            session.onvalidatemerchant = (event) => {
+                console.log("Validate merchant");
+                const validationURL = event.validationURL;
+                window.MonerisApplePay.validateSession(validationURL, apSessionValidationSuccess,
+                    apSessionValidationError);
+            };
+
+            session.onpaymentauthorized = (event) => {
+                // Send payment for processing...
+                const payment = event.payment;
+                const paymentJson = JSON.stringify(payment);
+                const respDiv = document.getElementById("apple-pay-resp");
+                const uiDiv = document.getElementById("apple-pay-ui");
+                uiDiv.classList.add("none");
+                respDiv.innerText = "Processing Payment...Please wait";
+                var moneris_request = {
+                    payment: event.payment,
+                    applePayRequest: request// optional - to be added to receive cust info
+                }
+                var transType = "preauth";
+                if (typeof (window.MonerisApplePay[transType]) === "function") {
+                    window.MonerisApplePay[transType](moneris_request, function (receipt) {
+                        //make call to your backend to check async response
+                        console.log(receipt);
+                        if (receipt.receipt.ResponseCode
+                            && !isNaN(receipt.receipt.ResponseCode)
+                            && parseInt(receipt.receipt.ResponseCode) < 50) {
+                            session.completePayment(ApplePaySession.STATUS_SUCCESS);
+                        } else {
+                            session.completePayment(ApplePaySession.STATUS_FAILURE);
+                        }
+                        respDiv.innerText = "" + JSON.stringify(receipt);
+                    });
+                }
+            }
+            session.begin();
+
+            function apSessionValidationSuccess(response) {
+                console.log(response);
+                session.completeMerchantValidation(response);
+            }
+
+            function apSessionValidationError(response) {
+                console.log("Failed to validate merchant session");
+                console.log(response);
+            }
         </script>
-        <script src="js/moneris.js"></script>
     </div>
 </body>
 
